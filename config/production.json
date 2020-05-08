@@ -1,0 +1,4 @@
+{
+    "mongoURI":"mongodb+srv://sarthaks:sarthaks@cluster0-btlfg.mongodb.net/conatctKeeper?retryWrites=true&w=majority",
+    "jwtSecret":"secret"
+}
