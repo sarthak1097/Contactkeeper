@@ -12,7 +12,10 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
-    CLEAR_ERRORS
+    CLEAR_ERRORS,
+    ACCOUNT_DELETED,
+    PROFILE_ERROR
+
   } from '../types';
 
 
@@ -70,7 +73,7 @@ import {
               
             dispatch({
                 type:REGISTER_FAIL,
-                payload:error.response.data.msg
+                payload:error.response.data.mssg
             })
           }
       } 
@@ -95,7 +98,7 @@ import {
             
           dispatch({
               type:LOGIN_FAIL,
-              payload:error.response.data.msg
+              payload:error.response.data.mssg
           })
         }
     } 
@@ -113,6 +116,27 @@ import {
             type:CLEAR_ERRORS
         })
         }
+
+
+     //delete account
+     const deleteAccount = async () =>  {
+        if (window.confirm('Are you sure? This can NOT be undone!')) {
+          try {
+            await axios.delete('/api/contacts');
+      
+            
+            dispatch({ type: ACCOUNT_DELETED });
+      
+            // dispatch(setAlert('Your account has been permanently deleted'));
+          } catch (err) {
+            dispatch({
+              type: PROFILE_ERROR,
+              payload: { msg: err.response.statusText, status: err.response.status }
+            });
+          }
+        }
+      };
+
    
    
     return (
@@ -126,7 +150,8 @@ import {
             clearErrors,
             loadUser,
             login,
-            logout
+            logout,
+            deleteAccount
 
 
 

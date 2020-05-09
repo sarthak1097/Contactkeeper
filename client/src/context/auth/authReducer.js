@@ -6,7 +6,9 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
-    CLEAR_ERRORS
+    CLEAR_ERRORS,
+    ACCOUNT_DELETED,
+    PROFILE_ERROR
   } from '../types';
 
   export default (state,action) => {
@@ -34,7 +36,7 @@ import {
           case AUTH_ERROR:
           case LOGOUT:
 
-            localStorage.removeItem('token')
+            localStorage.removeItem('token')            
               return{
                   ...state,
                   token:null,
@@ -50,6 +52,24 @@ import {
                  ...state,
                  error:null
              }
+
+          case ACCOUNT_DELETED:
+            return {
+                ...state,
+                token: null,
+                isAuthenticated: false,
+                loading: false,
+                user: null
+              };
+
+
+              case PROFILE_ERROR:
+                return {
+                  ...state,
+                  error: action.payload,
+                  loading: false,
+                  user: null
+                };
       
           default:
               return state;

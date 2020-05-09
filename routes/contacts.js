@@ -103,6 +103,25 @@ router.put('/:id', auth, async (req, res) => {
       res.status(500).send('Server Error');
     }
   });
+
+
+  // @route    DELETE api/profile
+// @desc     Delete profile
+// @access   Private
+router.delete('/', auth, async (req, res) => {
+  try {
+    // Remove contacts
+    await Contact.deleteMany({ user: req.user.id });
+  
+    // Remove user
+    await User.findOneAndRemove({ _id: req.user.id });
+
+    res.json({ msg: 'User deleted' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
   
 
 

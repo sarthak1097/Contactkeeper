@@ -24,6 +24,11 @@ const onLogout = () => {
 
 const authLinks = (
   <Fragment>
+  
+    {/* <li>
+    <Link to='/about'>About</Link>
+    </li> */}
+     
     <li>Hello {user && user.name}</li>
     <li>
       <a onClick={onLogout} href='#!'>
