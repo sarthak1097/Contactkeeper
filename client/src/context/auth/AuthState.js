@@ -73,7 +73,7 @@ import {
               
             dispatch({
                 type:REGISTER_FAIL,
-                payload:error.response.data.mssg
+                payload:error.response.data.msg
             })
           }
       } 
